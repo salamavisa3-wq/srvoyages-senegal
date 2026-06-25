@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SR Voyages — Video 3D Promo</title>
+<title>SR Voyages — Agence de Voyage N°1 au Sénégal | Video Promo</title>
+<meta name="description" content="SR Voyages, agence de voyage IATA N°1 au Sénégal. Billets, visas, Hajj & Omra depuis Thiès et Dakar. Vidéo promotionnelle 3D.">
+<meta property="og:title" content="SR Voyages — Agence de Voyage N°1 au Sénégal">
+<meta property="og:description" content="Billets d'avion, visas, Hajj & Omra depuis Thiès et Dakar. IATA agréée. Devis WhatsApp gratuit.">
+<meta property="og:image" content="https://srvoyages.com/wp-content/uploads/2026/06/agence-voyage-thies-sr-voyages.jpg">
+<meta property="og:url" content="https://salamavisa3-wq.github.io/srvoyages-senegal/video-3d.html">
+<meta property="og:type" content="video.other">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SR Voyages — Video Promo 3D | N°1 au Sénégal">
+<meta name="twitter:description" content="Billets, visas, Hajj & Omra. IATA agréée. 7 villes au Sénégal.">
+<meta name="twitter:image" content="https://srvoyages.com/wp-content/uploads/2026/06/agence-voyage-thies-sr-voyages.jpg">
+<link rel="canonical" href="https://srvoyages.com/">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a1628;overflow:hidden;font-family:-apple-system,sans-serif}
@@ -28,97 +39,52 @@ canvas{position:fixed;top:0;left:0;z-index:0}
 .cities{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1.5rem}
 .city{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:.5rem 1.5rem;color:#fff;font-size:clamp(.8rem,1.5vw,1.1rem)}
 .progress{position:fixed;bottom:0;left:0;height:4px;background:#1a7a4c;z-index:10;transition:width .1s linear}
+.sound-btn{position:fixed;top:16px;right:16px;z-index:20;background:rgba(26,122,76,.8);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;pointer-events:all}
+.share-bar{position:fixed;top:16px;left:16px;z-index:20;display:flex;gap:8px;pointer-events:all}
+.share-bar a{background:rgba(255,255,255,.15);color:#fff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;border:1px solid rgba(255,255,255,.2)}
+.share-bar a:hover{background:rgba(26,122,76,.8)}
 </style>
 </head>
 <body>
 <canvas id="bg"></canvas>
+
+<div class="share-bar">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsalamavisa3-wq.github.io%2Fsrvoyages-senegal%2Fvideo-3d.html" target="_blank" title="Partager sur Facebook">f</a>
+  <a href="https://twitter.com/intent/tweet?text=SR%20Voyages%20%E2%80%94%20Agence%20N%C2%B01%20au%20S%C3%A9n%C3%A9gal%20%F0%9F%87%B8%F0%9F%87%B3%20Billets%2C%20visas%2C%20Hajj%20%26%20Omra&url=https%3A%2F%2Fsrvoyages.com" target="_blank" title="Partager sur X">𝕏</a>
+  <a href="https://wa.me/?text=SR%20Voyages%20%E2%80%94%20Agence%20de%20voyage%20N%C2%B01%20au%20S%C3%A9n%C3%A9gal%20%F0%9F%87%B8%F0%9F%87%B3%20Billets%2C%20visas%2C%20Hajj.%20Regardez%20la%20vid%C3%A9o%20%3A%20https%3A%2F%2Fsalamavisa3-wq.github.io%2Fsrvoyages-senegal%2Fvideo-3d.html" target="_blank" title="Partager sur WhatsApp">W</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsalamavisa3-wq.github.io%2Fsrvoyages-senegal%2Fvideo-3d.html" target="_blank" title="Partager sur LinkedIn">in</a>
+</div>
+
+<button class="sound-btn" id="soundBtn" onclick="toggleSound()">&#128264;</button>
+
 <div class="overlay">
-  <div class="slide" id="s0">
-    <div class="logo"><span>SR</span> VOYAGES</div>
-    <div class="tagline">Agence de Voyage N&#176;1 au S&#233;n&#233;gal</div>
-  </div>
-  <div class="slide" id="s1">
-    <div class="service-card">
-      <div class="icon">&#9992;&#65039;</div>
-      <h2>Billets d&#8217;Avion</h2>
-      <p>Toutes compagnies depuis Dakar<br>Air France &#8226; Turkish &#8226; Emirates &#8226; RAM</p>
-    </div>
-  </div>
-  <div class="slide" id="s2">
-    <div class="service-card">
-      <div class="icon">&#128196;</div>
-      <h2>Visas</h2>
-      <p>Schengen &#8226; Canada &#8226; USA &#8226; UK<br>Accompagnement dossier complet</p>
-    </div>
-  </div>
-  <div class="slide" id="s3">
-    <div class="service-card">
-      <div class="icon">&#128331;</div>
-      <h2>Hajj &amp; Omra</h2>
-      <p>Packages tout inclus depuis Thi&#232;s &amp; Dakar<br>Encadrement religieux</p>
-    </div>
-  </div>
-  <div class="slide" id="s4">
-    <div class="stats">
-      <div class="stat"><div class="num">10+</div><div class="label">Ans</div></div>
-      <div class="stat"><div class="num">IATA</div><div class="label">Agr&#233;&#233;e</div></div>
-      <div class="stat"><div class="num">7</div><div class="label">Villes</div></div>
-      <div class="stat"><div class="num">5/5</div><div class="label">Google</div></div>
-    </div>
-    <div class="cities">
-      <span class="city">Thi&#232;s</span><span class="city">Dakar</span><span class="city">Saly</span>
-      <span class="city">Touba</span><span class="city">Saint-Louis</span><span class="city">Ziguinchor</span>
-    </div>
-  </div>
-  <div class="slide" id="s5">
-    <div class="logo"><span>SR</span> VOYAGES</div>
-    <div class="tagline">srvoyages.com</div>
-    <a href="https://srvoyages.com/" class="cta-btn" target="_blank">Devis Gratuit WhatsApp</a>
-    <div class="tagline" style="margin-top:1rem;font-size:.9rem;opacity:.7">+221 77 143 71 25</div>
-  </div>
+  <div class="slide" id="s0"><div class="logo"><span>SR</span> VOYAGES</div><div class="tagline">Agence de Voyage N&#176;1 au S&#233;n&#233;gal</div></div>
+  <div class="slide" id="s1"><div class="service-card"><div class="icon">&#9992;&#65039;</div><h2>Billets d&#8217;Avion</h2><p>Toutes compagnies depuis Dakar<br>Air France &#8226; Turkish &#8226; Emirates &#8226; RAM</p></div></div>
+  <div class="slide" id="s2"><div class="service-card"><div class="icon">&#128196;</div><h2>Visas</h2><p>Schengen &#8226; Canada &#8226; USA &#8226; UK<br>Accompagnement complet</p></div></div>
+  <div class="slide" id="s3"><div class="service-card"><div class="icon">&#128331;</div><h2>Hajj &amp; Omra</h2><p>Packages tout inclus depuis Thi&#232;s &amp; Dakar<br>Encadrement religieux</p></div></div>
+  <div class="slide" id="s4"><div class="stats"><div class="stat"><div class="num">10+</div><div class="label">Ans</div></div><div class="stat"><div class="num">IATA</div><div class="label">Agr&#233;&#233;e</div></div><div class="stat"><div class="num">7</div><div class="label">Villes</div></div><div class="stat"><div class="num">5/5</div><div class="label">Google</div></div></div><div class="cities"><span class="city">Thi&#232;s</span><span class="city">Dakar</span><span class="city">Saly</span><span class="city">Touba</span><span class="city">Saint-Louis</span><span class="city">Ziguinchor</span></div></div>
+  <div class="slide" id="s5"><div class="logo"><span>SR</span> VOYAGES</div><div class="tagline">srvoyages.com</div><a href="https://srvoyages.com/" class="cta-btn" target="_blank">Devis Gratuit WhatsApp</a><div class="tagline" style="margin-top:1rem;font-size:.9rem;opacity:.7">+221 77 143 71 25</div></div>
 </div>
 <div class="progress" id="prog"></div>
+
+<audio id="voiceover" preload="auto">
+  <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3DUb2yW72ARZ3obAj78CttT79fW/hf_20260625_014225_60c1aec1-758f-42a2-86d5-798751b9cd80.wav" type="audio/wav">
+</audio>
+
 <script>
-// 3D particle background
-const c=document.getElementById('bg'),x=c.getContext('2d');
-let W,H,pts=[];
-function resize(){W=c.width=innerWidth;H=c.height=innerHeight;pts=[];for(let i=0;i<150;i++)pts.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*2+.5,s:Math.random()*2+1})}
+var c=document.getElementById('bg'),x=c.getContext('2d'),W,H,pts=[];
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight;pts=[];for(var i=0;i<150;i++)pts.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*2+.5,s:Math.random()*2+1})}
 resize();addEventListener('resize',resize);
-function draw(t){
-  x.fillStyle='rgba(10,22,40,.15)';x.fillRect(0,0,W,H);
-  pts.forEach(p=>{
-    p.x+=Math.sin(t/2000+p.z)*p.s*.3;
-    p.y-=p.s*.4;
-    if(p.y<-10){p.y=H+10;p.x=Math.random()*W}
-    const sz=p.z*2;
-    const a=.3+p.z*.3;
-    x.beginPath();x.arc(p.x,p.y,sz,0,Math.PI*2);
-    x.fillStyle=`rgba(26,122,76,${a})`;x.fill();
-  });
-  // Connecting lines
-  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
-    const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
-    if(d<120){x.strokeStyle=`rgba(26,122,76,${.1*(1-d/120)})`;x.lineWidth=.5;x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.stroke()}
-  }
-  requestAnimationFrame(draw);
-}
+function draw(t){x.fillStyle='rgba(10,22,40,.15)';x.fillRect(0,0,W,H);pts.forEach(function(p){p.x+=Math.sin(t/2000+p.z)*p.s*.3;p.y-=p.s*.4;if(p.y<-10){p.y=H+10;p.x=Math.random()*W}var sz=p.z*2,a=.3+p.z*.3;x.beginPath();x.arc(p.x,p.y,sz,0,Math.PI*2);x.fillStyle='rgba(26,122,76,'+a+')';x.fill()});for(var i=0;i<pts.length;i++)for(var j=i+1;j<pts.length;j++){var d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<120){x.strokeStyle='rgba(26,122,76,'+(0.1*(1-d/120))+')';x.lineWidth=.5;x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.stroke()}}requestAnimationFrame(draw)}
 requestAnimationFrame(draw);
 
-// Slide show — 30 seconds total (5s per slide x 6 slides)
-const slides=document.querySelectorAll('.slide');
-const prog=document.getElementById('prog');
-const TOTAL=30000,PER=5000;
-let start=Date.now();
-function tick(){
-  const elapsed=Date.now()-start;
-  const pct=Math.min(elapsed/TOTAL*100,100);
-  prog.style.width=pct+'%';
-  const idx=Math.min(Math.floor(elapsed/PER),slides.length-1);
-  slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
-  if(elapsed>=TOTAL){start=Date.now()}
-  requestAnimationFrame(tick);
-}
+var slides=document.querySelectorAll('.slide'),prog=document.getElementById('prog'),audio=document.getElementById('voiceover'),soundBtn=document.getElementById('soundBtn');
+var TOTAL=30000,PER=5000,start=Date.now(),playing=false;
+function tick(){var elapsed=Date.now()-start;var pct=Math.min(elapsed/TOTAL*100,100);prog.style.width=pct+'%';var idx=Math.min(Math.floor(elapsed/PER),slides.length-1);slides.forEach(function(s,i){s.classList.toggle('active',i===idx)});if(elapsed>=TOTAL){start=Date.now();if(playing){audio.currentTime=0;audio.play()}}requestAnimationFrame(tick)}
 tick();
+
+function toggleSound(){if(!playing){audio.play();playing=true;soundBtn.innerHTML='&#128266;'}else{audio.pause();playing=false;soundBtn.innerHTML='&#128264;'}}
+document.body.addEventListener('click',function(){if(!playing){audio.play();playing=true;soundBtn.innerHTML='&#128266;'}},{once:true});
 </script>
 </body>
 </html>
