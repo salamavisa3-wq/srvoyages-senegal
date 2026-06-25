@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SR Voyages — Video 3D Promo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a1628;overflow:hidden;font-family:-apple-system,sans-serif}
+canvas{position:fixed;top:0;left:0;z-index:0}
+.overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none}
+.slide{position:absolute;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transition:opacity 1s ease}
+.slide.active{opacity:1}
+.logo{font-size:clamp(3rem,8vw,6rem);font-weight:900;color:#fff;text-shadow:0 0 40px rgba(26,122,76,.8),0 0 80px rgba(26,122,76,.4);letter-spacing:-.02em}
+.logo span{color:#1a7a4c}
+.tagline{font-size:clamp(1rem,3vw,1.8rem);color:rgba(255,255,255,.9);margin-top:.5em;font-weight:300}
+.service-card{background:rgba(26,122,76,.15);border:1px solid rgba(26,122,76,.4);backdrop-filter:blur(10px);border-radius:16px;padding:2rem 3rem;text-align:center;transform:translateY(30px);animation:cardIn .8s ease forwards}
+.service-card h2{color:#1a7a4c;font-size:clamp(1.5rem,4vw,2.5rem);margin-bottom:.5rem}
+.service-card p{color:rgba(255,255,255,.8);font-size:clamp(.9rem,2vw,1.3rem)}
+.service-card .icon{font-size:3rem;margin-bottom:.5rem}
+@keyframes cardIn{to{transform:translateY(0)}}
+.cta-btn{display:inline-block;background:#1a7a4c;color:#fff;padding:1rem 3rem;border-radius:50px;font-size:clamp(1rem,2.5vw,1.5rem);font-weight:700;text-decoration:none;margin-top:1.5rem;box-shadow:0 0 30px rgba(26,122,76,.5);animation:pulse 2s ease infinite;pointer-events:all}
+@keyframes pulse{0%,100%{box-shadow:0 0 30px rgba(26,122,76,.5)}50%{box-shadow:0 0 60px rgba(26,122,76,.8)}}
+.stats{display:flex;gap:3rem;margin-top:2rem}
+.stat{text-align:center}
+.stat .num{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#1a7a4c}
+.stat .label{color:rgba(255,255,255,.7);font-size:clamp(.7rem,1.5vw,1rem)}
+.cities{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1.5rem}
+.city{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:.5rem 1.5rem;color:#fff;font-size:clamp(.8rem,1.5vw,1.1rem)}
+.progress{position:fixed;bottom:0;left:0;height:4px;background:#1a7a4c;z-index:10;transition:width .1s linear}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="overlay">
+  <div class="slide" id="s0">
+    <div class="logo"><span>SR</span> VOYAGES</div>
+    <div class="tagline">Agence de Voyage N&#176;1 au S&#233;n&#233;gal</div>
+  </div>
+  <div class="slide" id="s1">
+    <div class="service-card">
+      <div class="icon">&#9992;&#65039;</div>
+      <h2>Billets d&#8217;Avion</h2>
+      <p>Toutes compagnies depuis Dakar<br>Air France &#8226; Turkish &#8226; Emirates &#8226; RAM</p>
+    </div>
+  </div>
+  <div class="slide" id="s2">
+    <div class="service-card">
+      <div class="icon">&#128196;</div>
+      <h2>Visas</h2>
+      <p>Schengen &#8226; Canada &#8226; USA &#8226; UK<br>Accompagnement dossier complet</p>
+    </div>
+  </div>
+  <div class="slide" id="s3">
+    <div class="service-card">
+      <div class="icon">&#128331;</div>
+      <h2>Hajj &amp; Omra</h2>
+      <p>Packages tout inclus depuis Thi&#232;s &amp; Dakar<br>Encadrement religieux</p>
+    </div>
+  </div>
+  <div class="slide" id="s4">
+    <div class="stats">
+      <div class="stat"><div class="num">10+</div><div class="label">Ans</div></div>
+      <div class="stat"><div class="num">IATA</div><div class="label">Agr&#233;&#233;e</div></div>
+      <div class="stat"><div class="num">7</div><div class="label">Villes</div></div>
+      <div class="stat"><div class="num">5/5</div><div class="label">Google</div></div>
+    </div>
+    <div class="cities">
+      <span class="city">Thi&#232;s</span><span class="city">Dakar</span><span class="city">Saly</span>
+      <span class="city">Touba</span><span class="city">Saint-Louis</span><span class="city">Ziguinchor</span>
+    </div>
+  </div>
+  <div class="slide" id="s5">
+    <div class="logo"><span>SR</span> VOYAGES</div>
+    <div class="tagline">srvoyages.com</div>
+    <a href="https://srvoyages.com/" class="cta-btn" target="_blank">Devis Gratuit WhatsApp</a>
+    <div class="tagline" style="margin-top:1rem;font-size:.9rem;opacity:.7">+221 77 143 71 25</div>
+  </div>
+</div>
+<div class="progress" id="prog"></div>
+<script>
+// 3D particle background
+const c=document.getElementById('bg'),x=c.getContext('2d');
+let W,H,pts=[];
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight;pts=[];for(let i=0;i<150;i++)pts.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*2+.5,s:Math.random()*2+1})}
+resize();addEventListener('resize',resize);
+function draw(t){
+  x.fillStyle='rgba(10,22,40,.15)';x.fillRect(0,0,W,H);
+  pts.forEach(p=>{
+    p.x+=Math.sin(t/2000+p.z)*p.s*.3;
+    p.y-=p.s*.4;
+    if(p.y<-10){p.y=H+10;p.x=Math.random()*W}
+    const sz=p.z*2;
+    const a=.3+p.z*.3;
+    x.beginPath();x.arc(p.x,p.y,sz,0,Math.PI*2);
+    x.fillStyle=`rgba(26,122,76,${a})`;x.fill();
+  });
+  // Connecting lines
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+    if(d<120){x.strokeStyle=`rgba(26,122,76,${.1*(1-d/120)})`;x.lineWidth=.5;x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.stroke()}
+  }
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+// Slide show — 30 seconds total (5s per slide x 6 slides)
+const slides=document.querySelectorAll('.slide');
+const prog=document.getElementById('prog');
+const TOTAL=30000,PER=5000;
+let start=Date.now();
+function tick(){
+  const elapsed=Date.now()-start;
+  const pct=Math.min(elapsed/TOTAL*100,100);
+  prog.style.width=pct+'%';
+  const idx=Math.min(Math.floor(elapsed/PER),slides.length-1);
+  slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
+  if(elapsed>=TOTAL){start=Date.now()}
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+</body>
+</html>
